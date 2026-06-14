@@ -1,0 +1,62 @@
+model:
+  backbone: efficientnet_b3
+  pretrained: true
+  img_size: 512
+  dropout: 0.3
+
+data:
+  # Multi-scale crop sampling for training. Each sample randomly picks one
+  # of these square-crop sizes (px, in original image space); 0 = full image.
+  # Mixing tight crops (precise refinement) with full-image samples (coarse
+  # localization) lets a single model serve both stages at inference.
+  scale_choices: [0, 384, 768, 1536]
+  # Random pixel offset applied to the crop center, so the marker is not
+  # always perfectly centered (mimics imperfect Stage-1 estimates).
+  crop_jitter: 200
+  # Fixed scale used for validation (must be one of scale_choices ideally,
+  # and should match the Stage-2 refine window used at inference so
+  # val_pck25 is representative of real-world performance).
+  val_scale: 1024
+  num_workers: 4
+  pin_memory: true
+
+augmentation:
+  hflip_prob: 0.5
+  vflip_prob: 0.5
+  rotation_degrees: 20
+  color_jitter:
+    brightness: 0.3
+    contrast: 0.3
+    saturation: 0.2
+    hue: 0.05
+  blur_prob: 0.2
+  blur_kernel: 5
+  grayscale_prob: 0.05
+  scale_range: [0.8, 1.0]
+
+training:
+  epochs: 80
+  batch_size: 16
+  lr: 3.0e-4
+  weight_decay: 1.0e-4
+  warmup_epochs: 3
+  grad_clip: 1.0
+  mixed_precision: true
+  val_split: 0.15
+  seed: 42
+  early_stopping_patience: 15
+  early_stopping_metric: pck25   # or 'macro_f1'
+
+loss:
+  wing_w: 10.0
+  wing_eps: 2.0
+  lambda_cls: 0.25
+  label_smoothing: 0.1
+
+inference:
+  tta: true
+  batch_size: 8
+  # Coarse-to-fine cascade of crop windows (px, in original image space).
+  # 0 = full image (Stage 1). Each subsequent stage crops around the
+  # previous stage's prediction and resizes back to img_size.
+  cascade_scales: [0, 1536, 768, 384]
