@@ -54,8 +54,10 @@ To prevent overfitting and enable model generalization to varying weather condit
 
 ### Loss Functions
 We train the model using a combined multi-task loss:
-$$\mathcal{L}_{\text{total}} = \mathcal{L}_{\text{regression}} + \lambda_{\text{cls}} \mathcal{L}_{\text{classification}}$$
-Where the classification weight $\lambda_{\text{cls}} = 0.25$.
+
+Loss<sub>total</sub> = Loss<sub>regression</sub> + &lambda;<sub>cls</sub> &times; Loss<sub>classification</sub>
+
+Where the classification weight &lambda;<sub>cls</sub> = 0.25.
 * **Keypoint Loss (Wing Loss):** Standard MSE or L1 loss penalizes small keypoint errors too weakly, leading to blurry coordinate estimates. We utilize **Wing Loss** (parameters $w=10$, $\epsilon=2$), which provides much stronger gradients for small errors, driving sub-pixel coordinate alignment.
 * **Classification Loss:** Standard **Cross Entropy Loss** with **Label Smoothing (0.1)** to prevent the model from becoming overconfident.
 
