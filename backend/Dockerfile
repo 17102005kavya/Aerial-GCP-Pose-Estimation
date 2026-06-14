@@ -17,8 +17,8 @@ RUN pip install --no-cache-dir -r requirements.txt fastapi uvicorn python-multip
 # Copy backend codebase
 COPY . .
 
-# Expose FastAPI server port
-EXPOSE 8000
+# Expose port (Hugging Face Spaces uses 7860, others inject PORT)
+EXPOSE 7860
 
-# Run with Gunicorn using Uvicorn workers for production concurrency
-CMD ["gunicorn", "-w", "2", "-k", "uvicorn.workers.UvicornWorker", "app:app", "--bind", "0.0.0.0:8000"]
+# Run with Gunicorn using Uvicorn workers, binding dynamically
+CMD ["sh", "-c", "gunicorn -w 2 -k uvicorn.workers.UvicornWorker app:app --bind 0.0.0.0:${PORT:-7860}"]
