@@ -4,6 +4,10 @@ A production-grade, end-to-end computer vision platform designed to localize Gro
 
 The project connects a **Next.js 15 / TypeScript** web frontend to a **FastAPI / PyTorch** backend serving an **EfficientNet-B3** multi-stage crop cascade regression model.
 
+**Pretrained weights:** https://drive.google.com/file/d/1foVQ4ED3TafLvuFyQrbcC9fcxW341nUv/view?usp=sharing
+
+**Test Data predictions:** `sample_predictions/predictions.json`
+
 ---
 
 ## Architecture Overview
