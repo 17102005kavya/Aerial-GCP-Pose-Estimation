@@ -157,75 +157,77 @@ export default function Home() {
         </section>
 
         {/* WORKSPACE SECTION */}
-        <section id="workspace" className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 scroll-mt-16">
-          <div className="flex flex-col gap-3 mb-10 text-center md:text-left">
-            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-foreground">
-              Detection Workspace
-            </h2>
-            <p className="text-sm text-muted-foreground max-w-lg">
-              Upload an aerial image, run the multi-stage cascade predictor, and interactively zoom or pan to verify coordinates.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            {/* Control Panel: Left (4 cols) */}
-            <div className="lg:col-span-5 flex flex-col gap-6 w-full">
-              <UploadArea onFileSelected={handleFileSelected} disabled={isLoading} />
-              
-              <AnimatePresence>
-                {file && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    className="overflow-hidden flex flex-col gap-4"
-                  >
-                    {!prediction && (
-                      <Button
-                        onClick={handleRunInference}
-                        disabled={isLoading}
-                        size="lg"
-                        className="w-full rounded-xl font-bold shadow-md shadow-primary/5 hover:shadow-primary/10 gap-2 relative bg-primary hover:bg-primary/95 text-primary-foreground group"
-                      >
-                        <Play className="h-4.5 w-4.5 text-primary-foreground fill-primary-foreground/20 group-hover:scale-105 transition-transform" />
-                        <span>{isLoading ? "Running EfficientNet Cascade..." : "Run Pose Estimator"}</span>
-                      </Button>
-                    )}
-
-                    {prediction && (
-                      <PredictionCard prediction={prediction} />
-                    )}
-                  </motion.div>
-                )}
-              </AnimatePresence>
+        <section id="workspace" className="w-full py-16 sm:py-20 scroll-mt-16">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col gap-3 mb-10 text-center md:text-left">
+              <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-foreground">
+                Detection Workspace
+              </h2>
+              <p className="text-sm text-muted-foreground max-w-lg">
+                Upload an aerial image, run the multi-stage cascade predictor, and interactively zoom or pan to verify coordinates.
+              </p>
             </div>
 
-            {/* Interactive Viewer: Right (7 cols) */}
-            <div className="lg:col-span-7 w-full">
-              {imageUrl && prediction ? (
-                <ImageViewer imageUrl={imageUrl} prediction={prediction} />
-              ) : (
-                <div className="relative aspect-[4/3] w-full overflow-hidden border border-border/60 rounded-2xl bg-card flex flex-col items-center justify-center text-center p-6 shadow-sm">
-                  {/* Subtle placeholder grid lines */}
-                  <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808005_1px,transparent_1px),linear-gradient(to_bottom,#80808005_1px,transparent_1px)] bg-[size:16px_16px]" />
-                  
-                  <div className="relative z-10 flex flex-col items-center gap-4">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-muted/80 text-muted-foreground border border-border/40">
-                      <Layers className="h-5.5 w-5.5 text-muted-foreground/60" />
-                    </div>
-                    <div className="flex flex-col gap-1 max-w-[280px]">
-                      <h3 className="font-semibold text-sm text-card-foreground">
-                        Spatial Visualizer Offline
-                      </h3>
-                      <p className="text-xs text-muted-foreground leading-relaxed">
-                        {file 
-                          ? "Click 'Run Pose Estimator' to analyze the image and generate prediction target markers."
-                          : "Upload a high-resolution drone photo to initiate the zoom-and-pan coordinate workspace."}
-                      </p>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+              {/* Control Panel: Left (4 cols) */}
+              <div className="lg:col-span-5 flex flex-col gap-6 w-full">
+                <UploadArea onFileSelected={handleFileSelected} disabled={isLoading} />
+                
+                <AnimatePresence>
+                  {file && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      className="overflow-hidden flex flex-col gap-4"
+                    >
+                      {!prediction && (
+                        <Button
+                          onClick={handleRunInference}
+                          disabled={isLoading}
+                          size="lg"
+                          className="w-full rounded-xl font-bold shadow-md shadow-primary/5 hover:shadow-primary/10 gap-2 relative bg-primary hover:bg-primary/95 text-primary-foreground group"
+                        >
+                          <Play className="h-4.5 w-4.5 text-primary-foreground fill-primary-foreground/20 group-hover:scale-105 transition-transform" />
+                          <span>{isLoading ? "Running EfficientNet Cascade..." : "Run Pose Estimator"}</span>
+                        </Button>
+                      )}
+
+                      {prediction && (
+                        <PredictionCard prediction={prediction} />
+                      )}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              {/* Interactive Viewer: Right (7 cols) */}
+              <div className="lg:col-span-7 w-full">
+                {imageUrl && prediction ? (
+                  <ImageViewer imageUrl={imageUrl} prediction={prediction} />
+                ) : (
+                  <div className="relative aspect-[4/3] w-full overflow-hidden border border-border/60 rounded-2xl bg-card flex flex-col items-center justify-center text-center p-6 shadow-sm">
+                    {/* Subtle placeholder grid lines */}
+                    <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808005_1px,transparent_1px),linear-gradient(to_bottom,#80808005_1px,transparent_1px)] bg-[size:16px_16px]" />
+                    
+                    <div className="relative z-10 flex flex-col items-center gap-4">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-muted/80 text-muted-foreground border border-border/40">
+                        <Layers className="h-5.5 w-5.5 text-muted-foreground/60" />
+                      </div>
+                      <div className="flex flex-col gap-1 max-w-[280px]">
+                        <h3 className="font-semibold text-sm text-card-foreground">
+                          Spatial Visualizer Offline
+                        </h3>
+                        <p className="text-xs text-muted-foreground leading-relaxed">
+                          {file 
+                            ? "Click 'Run Pose Estimator' to analyze the image and generate prediction target markers."
+                            : "Upload a high-resolution drone photo to initiate the zoom-and-pan coordinate workspace."}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              )}
+                )}
+              </div>
             </div>
           </div>
         </section>
