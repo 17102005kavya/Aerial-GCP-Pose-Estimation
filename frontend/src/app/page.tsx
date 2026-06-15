@@ -92,7 +92,7 @@ export default function Home() {
           {/* Subtle grid background */}
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800b_1px,transparent_1px),linear-gradient(to_bottom,#8080800b_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
           
-          <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 relative text-center">
+          <div className="w-full px-6 md:px-12 lg:px-16 relative text-center">
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
@@ -158,7 +158,7 @@ export default function Home() {
 
         {/* WORKSPACE SECTION */}
         <section id="workspace" className="w-full py-16 sm:py-20 scroll-mt-16">
-          <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
+          <div className="w-full px-6 md:px-12 lg:px-16">
             <div className="flex flex-col gap-3 mb-10 text-center md:text-left">
               <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-foreground">
                 Detection Workspace
@@ -234,7 +234,7 @@ export default function Home() {
 
         {/* METHODOLOGY GUIDE SECTION */}
         <section id="how-it-works" className="w-full bg-muted/30 border-t border-border/30 py-16 sm:py-20">
-          <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
+          <div className="w-full px-6 md:px-12 lg:px-16">
             <div className="text-center max-w-3xl mx-auto mb-16">
               <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-foreground">
                 How AeroPoint AI Works
