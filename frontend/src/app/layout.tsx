@@ -32,7 +32,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground transition-colors duration-300">
+      <body className="min-h-full flex flex-col bg-black text-foreground antialiased">
         <QueryProvider>
           <ThemeProvider
             attribute="class"
@@ -41,7 +41,9 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <TooltipProvider>
-              {children}
+              <div className="w-full max-w-[1440px] mx-auto min-h-screen flex flex-col bg-background text-foreground shadow-2xl shadow-black/80 border-x border-border/10 transition-colors duration-300">
+                {children}
+              </div>
               <Toaster position="top-right" richColors closeButton />
             </TooltipProvider>
           </ThemeProvider>
