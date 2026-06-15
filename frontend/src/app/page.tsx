@@ -109,7 +109,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl md:text-6xl max-w-4xl mx-auto leading-[1.1]"
+              className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl md:text-6xl w-full leading-[1.1]"
             >
               High-Precision GCP <span className="bg-gradient-to-r from-primary to-indigo-500 bg-clip-text text-transparent">Pose Estimation</span>
             </motion.h1>
@@ -118,7 +118,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mt-6 text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed"
+              className="mt-6 text-base sm:text-lg text-muted-foreground w-full leading-relaxed"
             >
               Automatically localize Ground Control Points in high-resolution aerial imagery and classify marker shapes with sub-pixel coordinate regression.
             </motion.p>
@@ -163,7 +163,7 @@ export default function Home() {
               <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-foreground">
                 Detection Workspace
               </h2>
-              <p className="text-sm text-muted-foreground max-w-lg">
+              <p className="text-sm text-muted-foreground w-full">
                 Upload an aerial image, run the multi-stage cascade predictor, and interactively zoom or pan to verify coordinates.
               </p>
             </div>
@@ -235,7 +235,7 @@ export default function Home() {
         {/* METHODOLOGY GUIDE SECTION */}
         <section id="how-it-works" className="w-full bg-muted/30 border-t border-border/30 py-16 sm:py-20">
           <div className="w-full px-6 md:px-12 lg:px-16">
-            <div className="text-center max-w-3xl mx-auto mb-16">
+            <div className="text-center w-full mb-16">
               <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-foreground">
                 How AeroPoint AI Works
               </h2>
@@ -286,7 +286,7 @@ export default function Home() {
             </div>
 
             {/* Performance Spec box */}
-            <div className="mt-12 bg-card/60 border border-border/60 rounded-2xl p-6 flex flex-col sm:flex-row items-center gap-6 max-w-4xl mx-auto shadow-sm backdrop-blur-md">
+            <div className="mt-12 bg-card/60 border border-border/60 rounded-2xl p-6 flex flex-col sm:flex-row items-center gap-6 w-full shadow-sm backdrop-blur-md">
               <CheckCircle2 className="h-10 w-10 text-emerald-500 shrink-0" />
               <div className="flex flex-col gap-1 text-center sm:text-left">
                 <h4 className="font-bold text-sm text-foreground">
